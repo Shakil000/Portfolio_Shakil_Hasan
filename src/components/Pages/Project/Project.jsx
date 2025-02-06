@@ -4,6 +4,7 @@ import { FaGithub } from "react-icons/fa";
 
 const Project = () => {
   const [selectedTech, setSelectedTech] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const projects = [
     {
@@ -125,52 +126,58 @@ const Project = () => {
     "Tailwind CSS",
   ];
 
-  const filteredProject =
-    selectedTech === "All"
-      ? projects
-      : projects.filter((project) => project.tech.includes(selectedTech));
+  // Filter projects based on search and selected technology
+  const filteredProjects = projects.filter((project) => {
+    const matchesSearch =
+      project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.description.toLowerCase().includes(searchQuery.toLowerCase());
+
+    const matchesTech =
+      selectedTech === "All" || project.tech.includes(selectedTech);
+
+    return matchesSearch && matchesTech;
+  });
 
   return (
-    <div className="bg-gray-100 py-12 px-6 pt-19">
+    <div className="bg-gray-100 py-12 px-6 lg:pt-20">
+      {/* Header */}
       <div className="text-center mb-8">
         <p className="text-gray-600">Some of my recent work</p>
-        <h2 className="text-4xl font-bold text-gray-900">
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
           My <span className="text-teal-600">Projects</span>
         </h2>
-        <div className="w-40 border-b-4 border-teal-600 mx-auto mt-2"></div>
+        <div className="w-32 md:w-40 border-b-4 border-teal-600 mx-auto mt-2"></div>
       </div>
 
-      {/* Search Bar */}
-      <div className="flex flex-col items-center mb-6">
-        <div className="flex gap-2">
-          <div className="flex items-center bg-white rounded-full shadow-md overflow-hidden w-96 border border-teal-500">
-            <input
-              type="text"
-              placeholder="Search"
-              className="w-full p-2 outline-none text-gray-700"
-            />
-            <button className="bg-teal-600 p-2.5 hover:bg-teal-700 transition-all">
-              <Search className="w-5 h-5 invert"></Search>
-            </button>
-          </div>
-          <div>
-            <button className="bg-teal-600 p-2 hover:bg-teal-700 transition-all rounded-md">
-              <LayoutGrid className="w-5 h-5 invert"></LayoutGrid>
-            </button>
-          </div>
+      {/* Search & Filter Section */}
+      <div className="flex flex-col md:items-center md:justify-between space-y-4 md:space-y-0 mb-6">
+        {/* Search Bar */}
+        <div className="w-full md:w-96 flex items-center bg-white rounded-full shadow-md overflow-hidden border border-teal-500 mb-5">
+          <input
+            type="text"
+            name="search"
+            placeholder="Search projects..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full p-2 outline-none text-gray-700"
+          />
+          <button className="bg-teal-600 p-2.5 hover:bg-teal-700 transition-all">
+            <Search className="w-5 h-5 invert" />
+          </button>
         </div>
+
         {/* Filter Buttons */}
-        <div className="flex flex-wrap gap-3 mt-4">
+        <div className="flex flex-wrap justify-center gap-2 md:justify-start">
           {techCategories.map((tech) => (
             <button
               key={tech}
               onClick={() => setSelectedTech(tech)}
-              className={`px-4 py-2 border border-teal-500 rounded-md shadow-sm transition-all 
-                    ${
-                      selectedTech === tech
-                        ? "bg-teal-600 text-white"
-                        : "text-teal-600 hover:bg-teal-600 hover:text-white"
-                    }`}
+              className={`px-4 py-2 text-sm border border-teal-500 rounded-md transition-all 
+          ${
+            selectedTech === tech
+              ? "bg-teal-600 text-white"
+              : "text-teal-600 hover:bg-teal-600 hover:text-white"
+          }`}
             >
               {tech}
             </button>
@@ -179,8 +186,8 @@ const Project = () => {
       </div>
 
       {/* Project Cards */}
-      <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredProject.map((project, index) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-screen-xl mx-auto">
+        {filteredProjects.map((project, index) => (
           <div
             key={index}
             className="bg-white shadow-lg rounded-xl overflow-hidden p-4"
@@ -190,31 +197,23 @@ const Project = () => {
               alt={project.title}
               className="w-full h-48 object-cover rounded-md"
             />
-            <h3 className="text-xl font-semibold mt-4 text-teal-700">
+            <h3 className="text-lg font-semibold mt-4 text-teal-700">
               {project.title}
             </h3>
             <p className="text-gray-600 text-sm mb-4">{project.description}</p>
             <div className="flex justify-between">
               <a
                 href={project.codeLink}
-                className="bg-gray-800 text-white px-3 py-1 rounded-lg flex justify-center items-center gap-2"
+                className="bg-gray-800 text-white px-3 py-1 rounded-lg flex items-center gap-2"
               >
                 <FaGithub /> Code
               </a>
-              {index === projects.length - 1 ||
-              index === projects.length - 2 ||
-              index === projects.length - 3 ? (
-                <span className="bg-gray-400 text-red-500 font-bold px-3 py-1 rounded-lg">
-                  Coming Soon
-                </span>
-              ) : (
-                <a
-                  href={project.liveLink}
-                  className="bg-teal-600 text-white px-3 py-1 rounded-lg"
-                >
-                  🔗 Live Link
-                </a>
-              )}
+              <a
+                href={project.liveLink}
+                className="bg-teal-600 text-white px-3 py-1 rounded-lg"
+              >
+                🔗 Live Link
+              </a>
             </div>
           </div>
         ))}
