@@ -1,4 +1,4 @@
-import { LayoutGrid, Search } from "lucide-react";
+import { LayoutGrid, Pickaxe, Search } from "lucide-react";
 import { useState } from "react";
 import { FaGithub } from "react-icons/fa";
 
@@ -197,7 +197,7 @@ const Project = () => {
               alt={project.title}
               className="w-full h-48 object-cover rounded-md"
             />
-            <h3 className="text-lg font-semibold mt-4 text-teal-700">
+            <h3 className="text-lg font-semibold mt-4 text-teal-700 animate-bounce">
               {project.title}
             </h3>
             <p className="text-gray-600 text-sm mb-4">{project.description}</p>
@@ -208,12 +208,11 @@ const Project = () => {
               >
                 <FaGithub /> Code
               </a>
-              <a
-                href={project.liveLink}
-                className="bg-teal-600 text-white px-3 py-1 rounded-lg"
-              >
-                🔗 Live Link
-              </a>
+              {(index === projects.length - 1 || index === projects.length - 2 || index === projects.length - 3) ? (
+                  <span className=" text-red-500 font-bold px-3 py-1 rounded-lg flex items-center justify-center gap-3"><Pickaxe/> Coming Soon</span>
+                ) : (
+                  <a href={project.liveLink} className="bg-teal-600 text-white px-3 py-1 rounded-lg">🔗 Live Link</a>
+                )}
             </div>
           </div>
         ))}
