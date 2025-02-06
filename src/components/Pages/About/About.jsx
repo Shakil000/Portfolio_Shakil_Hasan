@@ -54,30 +54,46 @@ const About = () => {
         </div>
       </div>
 
-      {/* Right Side - Profile Image */}
-      <div className="relative mt-10 md:mt-0">
-        <div className="relative w-48 h-48 md:w-60 md:h-60 mx-auto rounded-full border-8 border-yellow-500 overflow-hidden shadow-lg">
-          <img
-            src="/src/assets/WhatsApp Image 2025-01-09 at 11.48.21_bc3456b8.jpg"
-            alt="Profile"
-            className="w-full h-full object-cover"
-          />
-        </div>
+     {/* Right Side - Profile Image */}
+<div className="relative mt-10 md:mt-0">
+  {/* Outer Circle */}
+  <div className="relative w-64 h-64 md:w-72 md:h-72 mx-auto rounded-full border-2 border-dotted border-teal-500 overflow-hidden shadow-lg p-5 flex items-center justify-center">
+    
+    {/* Inner Circle */}
+    <div className="relative w-52 h-52 md:w-60 md:h-60 mx-auto rounded-full border-4 border-dotted border-gray-300 overflow-hidden shadow-lg p-5 flex items-center justify-center">
+      
+      {/* Profile Image */}
+      <img
+        src="/src/assets/WhatsApp Image 2025-01-09 at 11.48.21_bc3456b8.jpg"
+        alt="Profile"
+        className="w-full h-full object-cover rounded-full"
+      />
+    
+    </div>
+  </div>
 
-        {/* Circular Icons */}
-        <div className="absolute top-[-10px] left-[50%] transform -translate-x-1/2">
-          <FaInstagram className="bg-white p-2 text-teal-700 text-2xl rounded-full shadow-md" />
-        </div>
-        <div className="absolute bottom-[-10px] left-[50%] transform -translate-x-1/2">
-          <FaGithub className="bg-white p-2 text-teal-700 text-2xl rounded-full shadow-md" />
-        </div>
-        <div className="absolute left-[-10px] top-[50%] transform -translate-y-1/2">
-          <FaXTwitter className="bg-white p-2 text-teal-700 text-2xl rounded-full shadow-md" />
-        </div>
-        <div className="absolute right-[-10px] top-[50%] transform -translate-y-1/2">
-          <FaLinkedin className="bg-white p-2 text-teal-700 text-2xl rounded-full shadow-md" />
-        </div>
-      </div>
+  {/* Circular Icons */}
+  {/* Top Center (Instagram) */}
+  <div className="absolute top-[-25px] left-[50%] transform -translate-x-1/2">
+    <FaInstagram className="bg-white p-2 text-teal-700 text-3xl rounded-full shadow-md" />
+  </div>
+
+  {/* Bottom Center (GitHub) */}
+  <div className="absolute bottom-[-25px] left-[50%] transform -translate-x-1/2">
+    <FaGithub className="bg-white p-2 text-teal-700 text-3xl rounded-full shadow-md" />
+  </div>
+
+  {/* Left Center (Twitter/X) */}
+  <div className="absolute left-[-25px] top-[50%] transform -translate-y-1/2">
+    <FaXTwitter className="bg-white p-2 text-teal-700 text-3xl rounded-full shadow-md" />
+  </div>
+
+  {/* Right Center (LinkedIn) */}
+  <div className="absolute right-[-25px] top-[50%] transform -translate-y-1/2">
+    <FaLinkedin className="bg-white p-2 text-teal-700 text-3xl rounded-full shadow-md" />
+  </div>
+</div>
+
     </section>
         </div>
     );
