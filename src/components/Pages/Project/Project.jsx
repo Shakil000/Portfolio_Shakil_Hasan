@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Project = () => {
     return (
         <div className='lg:pt-16'>
