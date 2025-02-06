@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@keyframes float {
+    0% { transform: translateY(10); }
+    50% { transform: translateY(-50px); } /* Increased from -30px to -50px */
+    100% { transform: translateY(100); }
+  }
+  
+  
+  /* Apply the animations */
+  .animate-float { animation: float 4s infinite ease-in-out; } /* Slower and smoother */
+  
+  
