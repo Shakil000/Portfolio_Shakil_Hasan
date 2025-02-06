@@ -1,8 +1,5 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
-import Banner from "../Banner/Banner";
-import WhatIDo from "../WhatIDo/WhatIDo";
-import ToolsTechnologies from "../ToolsTechnologies/ToolsTechnologies";
 import Footer from "../Footer/Footer";
 
 const MainLayoutes = () => {
@@ -11,19 +8,12 @@ const MainLayoutes = () => {
             <header>
                 <Navbar></Navbar>
             </header>
-            <section>
-                <Banner></Banner>
-            </section>
-            <section>
-                <WhatIDo></WhatIDo>
-            </section>
-            <section>
-                <ToolsTechnologies></ToolsTechnologies>
+            <section className="min-h-screen">
+            <Outlet></Outlet>
             </section>
             <footer>
                 <Footer></Footer>
             </footer>
-            <Outlet></Outlet>
         </div>
     );
 };

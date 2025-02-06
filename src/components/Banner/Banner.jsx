@@ -1,16 +1,34 @@
 import { useTypewriter, Cursor } from "react-simple-typewriter";
-import { FaInstagram, FaFacebook, FaGithub, FaLinkedin, FaYoutube } from "react-icons/fa";
+import {
+  FaInstagram,
+  FaFacebook,
+  FaGithub,
+  FaLinkedin,
+  FaYoutube,
+} from "react-icons/fa";
 
 const Banner = () => {
   const [text] = useTypewriter({
-    words: ["Shakil Hasan Mithun", "Web Designer", "Web Developer", "MERN Stack Developer"],
+    words: [
+      "Shakil Hasan Mithun",
+      "Web Designer",
+      "Web Developer",
+      "MERN Stack Developer",
+    ],
     loop: true,
     typeSpeed: 100,
     deleteSpeed: 50,
   });
 
+  const socialLinks = [
+    { Icon: FaGithub, url: "https://github.com/Shakil000" },
+    { Icon: FaLinkedin, url: "https://www.linkedin.com/in/mithun5934/" },
+    { Icon: FaFacebook, url: "https://www.facebook.com/Shakil.nhasan2" },
+    { Icon: FaYoutube, url: "https://www.youtube.com/@Racershakil" },
+  ];
+
   return (
-    <section className="bg-[#EDE9FE] min-h-screen flex items-center justify-center px-6 md:px-12 relative">
+    <section className="bg-[#EDE9FE] min-h-screen flex items-center justify-center px-6 md:px-12">
       {/* Grid Background */}
       <div className="absolute inset-0 bg-grid-purple opacity-20"></div>
 
@@ -26,7 +44,11 @@ const Banner = () => {
             <Cursor cursorStyle="|" />
           </h1>
           <p className="mt-4 text-lg text-gray-700 max-w-lg mx-auto md:mx-0">
-            “I have a strong interest in web development and thrive on challenges that push me to learn and grow in new directions. My curiosity drives me to explore and expand my skills continuously. I enjoy problem-solving and building innovative solutions that enhance user experiences.”
+            “I have a strong interest in web development and thrive on
+            challenges that push me to learn and grow in new directions. My
+            curiosity drives me to explore and expand my skills continuously. I
+            enjoy problem-solving and building innovative solutions that enhance
+            user experiences.”
           </p>
           {/* Buttons */}
           <div className="mt-6 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
@@ -39,8 +61,15 @@ const Banner = () => {
           </div>
           {/* Social Icons */}
           <div className="flex gap-4 mt-6 justify-center md:justify-start">
-            {[FaInstagram, FaFacebook, FaGithub, FaLinkedin, FaYoutube].map((Icon, index) => (
-              <Icon key={index} className="text-teal-700 text-2xl hover:scale-110 cursor-pointer" />
+            {socialLinks.map(({ Icon, url }, index) => (
+              <a
+                key={index}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon className="text-teal-700 text-2xl hover:scale-110 cursor-pointer transition-transform duration-200" />
+              </a>
             ))}
           </div>
         </div>
@@ -48,7 +77,11 @@ const Banner = () => {
         {/* Right Side: Meditating Person Illustration */}
         <div className="relative flex-1 flex justify-center">
           {/* Meditating Person Image */}
-          <img src="/src/assets/man.png" alt="Meditating Person" className="w-full max-w-[300px] md:max-w-[400px] lg:max-w-[500px] animate-float mt-20" />
+          <img
+            src="/src/assets/man.png"
+            alt="Meditating Person"
+            className="w-full max-w-[300px] md:max-w-[400px] lg:max-w-[500px] animate-float mt-20"
+          />
 
           {/* Floating Elements */}
           {/* <img src="/src/assets/book.png" alt="Book" className="w-12 absolute top-5 left-5 md:left-0 md:top-10 animate-float hidden md:block" />

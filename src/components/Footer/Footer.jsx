@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
+import { FaFacebook } from "react-icons/fa";
 import {
   FaLinkedin,
   FaGithub,
   FaXTwitter,
-  FaInstagram,
   FaArrowUp,
 } from "react-icons/fa6";
 
@@ -24,17 +24,17 @@ const Footer = () => {
         Shakil Hasan Mithun
       </h2>
       <div className="flex justify-center gap-4 my-4 text-2xl">
-        <a href="#" className="hover:text-gray-300">
+        <a href="https://www.linkedin.com/in/mithun5934/" className="hover:text-gray-300">
           <FaLinkedin />
         </a>
-        <a href="#" className="hover:text-gray-300">
+        <a href="https://github.com/Shakil000" className="hover:text-gray-300">
           <FaGithub />
         </a>
-        <a href="#" className="hover:text-gray-300">
+        <a href="https://x.com/RacerShakil111" className="hover:text-gray-300">
           <FaXTwitter />
         </a>
-        <a href="#" className="hover:text-gray-300">
-          <FaInstagram />
+        <a href="https://www.facebook.com/Shakil.nhasan2" className="hover:text-gray-300">
+          <FaFacebook />
         </a>
       </div>
       <div className="bg-teal-900 py-3">

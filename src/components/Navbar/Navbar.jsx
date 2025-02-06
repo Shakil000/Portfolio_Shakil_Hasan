@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaRegMoon, FaBars, FaTimes } from "react-icons/fa";
 import { GiShakingHands } from "react-icons/gi";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [time, setTime] = useState(new Date());
@@ -14,7 +15,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-teal-700 text-white px-6 py-4 flex justify-between items-center relative">
+    <nav className="bg-teal-700 text-white px-6 py-4 flex justify-between items-center lg:fixed w-full mt-0 z-50">
       {/* Left Section: Logo */}
       <div className="flex items-center space-x-2">
         <GiShakingHands className="h-9 w-9 font-bold" />
@@ -36,10 +37,10 @@ const Navbar = () => {
 
       {/* Right Section: Navigation Links */}
       <div className="hidden md:flex items-center space-x-6">
-        <a href="#" className="hover:underline">Home</a>
-        <a href="#" className="hover:underline">About</a>
-        <a href="#" className="hover:underline">Projects</a>
-        <a href="#" className="hover:underline">Contact</a>
+      <Link to="/" className="hover:underline">Home</Link>
+          <Link to="/about" className="hover:underline">About</Link>
+          <Link to="/project" className="hover:underline">Projects</Link>
+          <Link to="/contact" className="hover:underline">Contact</Link>
         <span className="border-l border-gray-300 h-5"></span>
         <FaRegMoon className="cursor-pointer" />
       </div>
@@ -47,10 +48,10 @@ const Navbar = () => {
       {/* Mobile Menu - Slide In */}
       {menuOpen && (
         <div className="absolute top-16 left-0 w-full bg-teal-800 text-white flex flex-col space-y-4 p-6 shadow-md md:hidden z-40">
-          <a href="#" className="hover:underline">Home</a>
-          <a href="#" className="hover:underline">About</a>
-          <a href="#" className="hover:underline">Projects</a>
-          <a href="#" className="hover:underline">Contact</a>
+          <Link to="/" className="hover:underline">Home</Link>
+          <Link to="/about" className="hover:underline">About</Link>
+          <Link to="/project" className="hover:underline">Projects</Link>
+          <Link to="contact" className="hover:underline">Contact</Link>
           <span className="border-t border-gray-300 my-2"></span>
           <FaRegMoon className="cursor-pointer mx-auto text-2xl" />
         </div>
