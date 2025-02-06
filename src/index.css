@@ -10,4 +10,8 @@
   /* Apply the animations */
   .animate-float { animation: float 4s infinite ease-in-out; } /* Slower and smoother */
   
+  @font-face {
+    font-family: 'Lobster';
+    src: url('/fonts/your-font-file.ttf') format('truetype');
+  }
   
