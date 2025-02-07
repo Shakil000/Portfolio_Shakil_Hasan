@@ -1,11 +1,11 @@
 import { useTypewriter, Cursor } from "react-simple-typewriter";
 import {
-  FaInstagram,
   FaFacebook,
   FaGithub,
   FaLinkedin,
   FaYoutube,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   const [text] = useTypewriter({
@@ -28,12 +28,12 @@ const Banner = () => {
   ];
 
   return (
-    <section className="bg-[#EDE9FE] min-h-screen flex items-center justify-center px-6 md:px-12">
+    <section className="bg-[#EDE9FE] min-h-screen flex items-center justify-center px-6 md:px-12 pt-18">
       {/* Grid Background */}
       <div className="absolute inset-0 bg-grid-purple opacity-20"></div>
 
       {/* Content Wrapper */}
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 relative z-10 w-full">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 relative z-10 w-full ">
         {/* Left Content */}
         <div className="text-center md:text-left flex-1">
           <h2 className="text-2xl flex items-center gap-2 justify-center md:justify-start">
@@ -52,10 +52,22 @@ const Banner = () => {
           </p>
           {/* Buttons */}
           <div className="mt-6 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
-            <button className="bg-teal-700 text-white px-6 py-3 rounded-lg shadow-md hover:bg-teal-800 transition">
-              Hire Me
-            </button>
-            <button className="bg-teal-700 text-white px-6 py-3 rounded-lg shadow-md hover:bg-teal-800 transition">
+            <Link to="/contact">
+              <button className="bg-teal-700 text-white px-6 py-3 rounded-lg shadow-md hover:bg-teal-800 transition">
+                Hire Me
+              </button>
+            </Link>
+            <button
+              onClick={() => {
+                const link = document.createElement("a");
+                link.href = "/src/assets/resume- Shakil Hasan Mithun.pdf"; // Path to the resume file in public folder
+                link.download = "Shakil_Hasan_Resume.pdf"; // The name of the downloaded file
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }}
+              className="bg-teal-700 text-white px-6 py-3 rounded-lg shadow-md hover:bg-teal-800 transition"
+            >
               Download Resume
             </button>
           </div>
