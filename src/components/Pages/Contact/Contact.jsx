@@ -1,18 +1,53 @@
+import { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaInstagram, FaFacebook, FaGithub, FaLinkedin, FaYoutube, FaLink } from "react-icons/fa";
 import { FaUser, FaCommentDots, FaPaperPlane, FaHeadset } from "react-icons/fa";
-// import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import emailjs from "@emailjs/browser";
+import Swal from "sweetalert2";
 
 
-// const containerStyle = {
-//     width: "100%",
-//     height: "300px",
-//   };
-  
-//   const center = {
-//     lat: 22.5726, // Replace with your latitude
-//     lng: 88.3639, // Replace with your longitude
-//   };
 const Contact = () => {
+
+  const [loading, setLoading] = useState();
+  const form = useRef();
+const {
+  register,
+  handleSubmit,
+  reset,
+  formState: { errors },
+} = useForm();
+
+const onSubmit = async (data) => {
+  setLoading(true);
+
+  emailjs
+    .sendForm(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      form.current,
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    )
+    .then(() => {
+      setLoading(false);
+      reset(); // Reset the form after successful submission
+      Swal.fire({
+        title: "Success!",
+        text: "Your message has been sent successfully.",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+    })
+    .catch(() => {
+      setLoading(false);
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong. Please try again later.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    });
+};
+
     return (
         <div className='lg: pt-16'>
             <div className="bg-gray-100 flex flex-col items-center py-10">
@@ -61,7 +96,7 @@ const Contact = () => {
       <div className="w-36 border-t-4 border-teal-700 mb-4"></div>
 
       {/* Social Buttons */}
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap gap-3  items-center justify-center">
         <a href="https://www.facebook.com/Shakil.nhasan2" className="flex items-center px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 transition">
           <FaFacebook className="mr-2" /> Facebook
         </a>
@@ -108,40 +143,60 @@ const Contact = () => {
               I am here for you. How can I help?
             </h2>
 
-            <form className="space-y-4">
-              <div className="flex items-center bg-white p-3 rounded-lg shadow-md">
-                <FaUser className="text-teal-500 mr-3" />
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  className="w-full outline-none bg-transparent"
-                />
-              </div>
+            <form ref={form} onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div className="flex items-center bg-white p-3 rounded-lg shadow-md">
+              <FaUser className="text-teal-500 mr-3"/>
+            <input
+              {...register("from_name", { required: "Name is required" })}
+              type="text"
+              name="from_name"
+              placeholder="Enter your username"
+              className="w-full outline-none bg-transparent"
+            />
+            {errors.name && (
+              <span className="text-red-600">{errors.name.message}</span>
+            )}
+          </div>
 
-              <div className="flex items-center bg-white p-3 rounded-lg shadow-md">
+          <div className="flex items-center bg-white p-3 rounded-lg shadow-md">
                 <FaPhone className="text-teal-500 mr-3" />
                 <input
+                 {...register("phone", { required: "Phone is required" })}
                   type="text"
+                  name="phone"
                   placeholder="Your Phone Number"
                   className="w-full outline-none bg-transparent"
                 />
+                {errors.phone && (
+              <span className="text-red-600">{errors.phone.message}</span>
+            )}
               </div>
 
               <div className="flex items-center bg-white p-3 rounded-lg shadow-md">
                 <FaEnvelope className="text-teal-500 mr-3" />
                 <input
+                {...register("email", { required: "Email is required" })}
                   type="email"
+                  name="email"
                   placeholder="Your Email"
                   className="w-full outline-none bg-transparent"
                 />
+                {errors.email && (
+              <span className="text-red-600">{errors.email.message}</span>
+            )}
               </div>
 
               <div className="flex items-start bg-white p-3 rounded-lg shadow-md">
                 <FaCommentDots className="text-teal-500 mr-3 mt-1" />
                 <textarea
+                 {...register("message", { required: "Message is required" })}
                   placeholder="Your Message"
+                  name="message"
                   className="w-full outline-none bg-transparent resize-none h-24"
                 ></textarea>
+                 {errors.message && (
+              <span className="text-red-600">{errors.message.message}</span>
+            )}
               </div>
 
               <button className="bg-teal-600 hover:bg-teal-700 text-white py-3 w-full rounded-lg flex items-center justify-center transition">
